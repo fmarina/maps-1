@@ -39,5 +39,21 @@ function inicializarMapa() {
     var casaCentral = { lat: -31.4662446, lng: -64.3983766 } //casa central en Córdoba
     // The map, centered at localizacion
     var map =new google.maps.Map(document.getElementById('maps'),{zoom: 4, center: casaCentral});
+
+    localizaciones.forEach(localizacion => {
+        //cargo los marcadores
+        var marker = new google.maps.Marker({
+          position: localizacion.position, 
+          map: map
+        });       
+        //cuando hace click se abre la ventanita infowindows con el nombre      
+        var infowindow = new google.maps.InfoWindow({
+          content: localizacion.content
+        });
+  
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }); 
   
 }
